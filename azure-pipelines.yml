@@ -1,0 +1,24 @@
+
+
+
+trigger:
+- main
+
+pool:
+  'default'
+
+steps:
+- task: JFrogNpm@1
+  inputs:
+    command: 'install'
+    artifactoryConnection: 'brosef-rt'
+    sourceRepo: 'npm'
+    collectBuildInfo: true
+    threads: '1'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+- task: JFrogPublishBuildInfo@1
+  inputs:
+    artifactoryConnection: 'brosef-rt'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
